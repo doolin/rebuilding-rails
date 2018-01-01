@@ -1,7 +1,10 @@
+require 'pry'
+require 'json'
+
 class QuotesController < Rulers::Controller
   def a_quote
-    'There is nothing good or bad but thinking makes it so.' +
-      "\n<pre>\n#{env}\n</pre>"
+    env[:quote] = 'There is nothing good or bad but thinking makes it so.'
+    "\n<pre>\n#{env.to_json}\n</pre>"
   end
 
   def exception
