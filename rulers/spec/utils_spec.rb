@@ -7,5 +7,13 @@ RSpec.describe Rulers do
     example 'FooBar' do
       expect(Rulers.to_underscore('FooBar')).to eq 'foo_bar'
     end
+
+    example 'BOBSays' do
+      expect(Rulers.to_underscore('BOBSays')).to eq 'bob_says'
+    end
+
+    example 'a7D' do
+      expect(Rulers.to_underscore('a7D')).to eq 'a7_d'
+    end
   end
 end
