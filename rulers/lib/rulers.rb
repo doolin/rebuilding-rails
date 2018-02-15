@@ -2,8 +2,9 @@ require "rulers/array"
 require "rulers/version"
 require 'rulers/routing'
 require 'rulers/util'
+require 'rulers/dependencies'
 
-require 'pry'
+# require 'pry'
 
 module Rulers
   class Application
