@@ -46,5 +46,4 @@ module Rulers
       [200, { 'Content-Type' => 'text/html' }, [text]]
     end
   end
-
 end
