@@ -20,7 +20,7 @@ class RulersAppTest < Test::Unit::TestCase
   end
 
   def test_request
-    get '/'
+    get '/example/route'
     assert last_response.ok?
     body = last_response.body
     assert body['Hello']
