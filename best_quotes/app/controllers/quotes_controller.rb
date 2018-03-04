@@ -23,4 +23,12 @@ class QuotesController < Rulers::Controller
     quote_1 = FileModel.find(1)
     render :quote, obj: quote_1
   end
+
+  def new_quote
+    attrs = {
+      'submitter' => 'web user',
+      'quote' => 'A picture is worth 1 k words',
+      'attribition' => 'Rebuilding Rails'
+    }
+  end
 end
