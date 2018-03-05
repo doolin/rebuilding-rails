@@ -30,5 +30,7 @@ class QuotesController < Rulers::Controller
       'quote' => 'A picture is worth 1 k words',
       'attribition' => 'Rebuilding Rails'
     }
+    m = FileModel.create(attrs)
+    render :quote, obj: m
   end
 end

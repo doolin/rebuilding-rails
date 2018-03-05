@@ -40,11 +40,11 @@ module Rulers
 
         files = Dir['db/quotes/*.json']
         names = files.map { |f| File.split(f)[-1] }
-        highest = name.map { |b| b.to_i }.max
+        highest = names.map { |b| b.to_i }.max
         id = highest + 1
 
         File.open("db/quotes/#{id}.json", 'w') do |f|
-          f.write <<TEMPLATE
+          f.write <<-TEMPLATE
           {
             "submitter": "#{hash["submitter"]}",
             "quote": "#{hash["quote"]}",
