@@ -30,5 +30,9 @@ module Rulers
     def request
       @request ||= Rack::Request.new(env)
     end
+
+    def params
+      @request.params
+    end
   end
 end
