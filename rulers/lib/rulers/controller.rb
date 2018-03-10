@@ -40,5 +40,13 @@ module Rulers
       a = [text].flatten
       @response = Rack::Response.new(a, status, headers)
     end
+
+    def get_response
+      @response
+    end
+
+    def render_response(*args)
+      response(render(*args))
+    end
   end
 end
