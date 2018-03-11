@@ -15,7 +15,7 @@ module Rulers
         return [404, { 'Content-Type' => 'text/html' }, []]
       end
 
-      if env['PATH_INFO'] == '/'
+      # if env['PATH_INFO'] == '/'
         # Note that it's difficult to make Chrome NOT cache a redirect
         # on the browser side. The Chrome team acknowledges this as a
         # bug, and has resolved it as "won't fix."
@@ -34,17 +34,18 @@ module Rulers
 
         # public/index.html is read from the calling application,
         # in this case, best_quotes.
-        return [200, { 'Content-Type' => 'text/html' }, [File.open('public/index.html').read]]
-      end
+        # return [200, { 'Content-Type' => 'text/html' }, [File.open('public/index.html').read]]
+      # end
 
       klass, act = get_controller_and_action(env)
       controller = klass.new(env)
-      begin
-        text = controller.send(act)
-      rescue => e
-        text = e.message
+      text = controller.send(act)
+      r = controller.get_response
+      if r
+        [r.status, r.headers, [r.body].flatten]
+      else
+        [200, { 'Content-Type' => 'text/html' }, [text]]
       end
-      [200, { 'Content-Type' => 'text/html' }, [text]]
     end
   end
 end
