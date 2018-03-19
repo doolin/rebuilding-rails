@@ -23,6 +23,25 @@ module Rulers
         end
       end
 
+      def self.create(values)
+        values.delete('id')
+        keys = schema.keys = ['id']
+        vals = keys.map do |key|
+          values[key] ? to_sql(values[key]) : 'null'
+        end
+
+        DB.execute <<-SQL
+        INSERT INTO #{table} (#{keys.join(',')})
+          VALUES (#{vals.join(',')});
+        SQL
+
+        raw_vals = keys.map { |k| valuse[k] }
+        data = Hash[keys.zip(raw_vals)]
+        sql = 'SELECT last_insert_rowid();'
+        data['id'] = DB.execute(sql)[0][0]
+        self.new(data)
+      end
+
       def self.table
         Rulers.to_underscore(name)
       end
