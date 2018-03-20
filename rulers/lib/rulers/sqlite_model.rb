@@ -42,6 +42,12 @@ module Rulers
         self.new(data)
       end
 
+      def self.count
+        DB.execute(<<-SQL)[0][0]
+        SELECT COUNT(*) from #{table}
+        SQL
+      end
+
       def self.table
         Rulers.to_underscore(name)
       end
