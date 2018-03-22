@@ -23,6 +23,16 @@ module Rulers
         end
       end
 
+      def self.find(id)
+        row = DB.execute(<<-SQL)
+        SELECT #{schema.keys.join(',')} FROM #{table}
+        WHERE id = #{id};
+        SQL
+
+        data = Hash[schema.keys.zip[0]]
+        self.new(data)
+      end
+
       def self.create(values)
         values.delete('id')
         keys = schema.keys = ['id']
