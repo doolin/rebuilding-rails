@@ -33,6 +33,14 @@ module Rulers
         self.new(data)
       end
 
+      def [](name)
+        @hash[name.to_s]
+      end
+
+      def []=(name, value)
+        @hash[name.to_s] = value
+      end
+
       def self.create(values)
         values.delete('id')
         keys = schema.keys = ['id']
