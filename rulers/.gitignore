@@ -9,6 +9,7 @@
 
 *.gem
 *.bye*
+*.db
 
 # rspec failure tracking
 .rspec_status
