@@ -29,7 +29,7 @@ module Rulers
         WHERE id = #{id};
         SQL
 
-        data = Hash[schema.keys.zip[0]]
+        data = Hash[schema.keys.zip row[0]]
         self.new(data)
       end
 
