@@ -16,3 +16,11 @@ top_id = mt['id'].to_i
   mt_id = MyTable.find(id)
   puts "Found title #{mt_id['title']}."
 end
+
+# create row
+mt = MyTable.create('title' => 'I saw it again!')
+mt['title'] = 'I really did!'
+mt.save!
+
+mt2 = MyTable.find(mt['id'])
+puts "Title: #{mt2['title']}"
