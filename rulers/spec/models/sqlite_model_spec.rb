@@ -9,5 +9,9 @@ RSpec.describe Rulers::Model::SQLite3 do
     it 'returns string for number' do
       expect(described_class.to_sql(3)).to eq '3'
     end
+
+    it 'returns \'quoted\' for "quoted"' do
+      expect(described_class.to_sql("foo")).to eq "'foo'"
+    end
   end
 end
