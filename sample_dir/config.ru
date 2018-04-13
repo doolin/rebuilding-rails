@@ -32,3 +32,24 @@ run proc {
   [200, { 'Content-Type' => 'text/html' },
     ['Hello World!']]
 }
+
+class Canadianize
+  def initialize(app, arg = "")
+    @app = app
+    @arg = arg
+  end
+
+  def call(env)
+    status, headers, content = @app.call(env)
+    content[0] = += @arg + ", eh?"
+    [status, headers, content]
+  end
+
+  use Canadianize, ", simple"
+end
+run proc {
+  [200, { 'Content-Type' => 'text/html' },
+    ['Hello world']]
+}
+
+
