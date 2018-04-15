@@ -33,6 +33,7 @@ run proc {
   [200, { 'Content-Type' => 'text/html' },
     ['Hello World!']]
 }
+=end
 
 class Canadianize
   def initialize(app, arg = "")
@@ -51,24 +52,4 @@ end
 run proc {
   [200, { 'Content-Type' => 'text/html' },
     ['Hello world']]
-}
-=end
-
-require 'rack/lobster'
-
-use Rack::ContentType
-
-map '/lobster' do
-  use Rack::ShowExceptions
-  run Rack::Lobster
-end
-
-map '/lobster/but_not' do
-  run proc {
-    [200, {}, ['Really not a lobster']]
-  }
-end
-
-run proc {
-  [200, {}, ['Not a lobster']]
 }
