@@ -11,7 +11,7 @@ class BenchMarker
     t = Time.now
 
     result = nil
-    @runs.times { reult = @app.call(env) }
+    @runs.times { result = @app.call(env) }
 
     t2 = Time.now - t
     STDERR.puts <<-OUTPUT
