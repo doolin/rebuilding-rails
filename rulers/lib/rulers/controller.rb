@@ -7,6 +7,23 @@ module Rulers
 
     def initialize(env)
       @env = env
+      @routing_params = {}
+    end
+
+    def dispatch(action, routing_params = {})
+      @routing_params = routing_params
+      text = self.send(action)
+      r = get_response
+      if r
+        [r.status, r.headers, [r.body].flatten]
+      else
+        [200, { 'Content-Type' => 'text/html' },
+         [text].flatten]
+      end
+    end
+
+    def self.action(act, rp = {})
+      proc { |e| self.new(e).dispatch(act, rp) }
     end
 
     def env
@@ -32,7 +49,7 @@ module Rulers
     end
 
     def params
-      @request.params
+      @request.params.merge(@routing_params)
     end
 
     def response(text, status = 200, headers = {})
