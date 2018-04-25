@@ -24,6 +24,12 @@ class BenchMarker
     result
   end
 end
+use BenchMarker, 1
 
-use BenchMarker, 10_000
+require './config/application'
+
+map '/' do
+  run QuotesController.action(:index)
+end
+
 run BestQuotes::Application.new
