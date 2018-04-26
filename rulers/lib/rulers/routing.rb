@@ -1,3 +1,15 @@
+class RouteObject
+  def initialize
+    @rules = []
+  end
+
+  def match(url, *args)
+  end
+
+  def check_url(url)
+  end
+end
+
 module Rulers
   class Application
     def get_controller_and_action(env)
