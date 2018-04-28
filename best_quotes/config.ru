@@ -1,7 +1,5 @@
 require_relative 'config/application'
 
-use Rack::ContentType
-
 class BenchMarker
   def initialize(app, runs = 100)
     @app, @runs = app, runs
@@ -28,8 +26,26 @@ use BenchMarker, 1
 
 require './config/application'
 
-map '/' do
-  run QuotesController.action(:index)
+
+# map '/' do
+#   run QuotesController.action(:index)
+# end
+
+app = BestQuotes::Application.new
+
+use Rack::ContentType
+
+app.route do
+  match '', 'quotes#index'
+  match 'sub-app',
+    proc { [200, {}, ['Hello, sub-app!']] }
+
+  # default routes
+  match ':controller/:id/:action'
+  match ':controller/:id',
+    default: { 'action' => 'show' }
+  match ':controller',
+    default: { 'action' => 'index' }
 end
 
-run BestQuotes::Application.new
+run app
