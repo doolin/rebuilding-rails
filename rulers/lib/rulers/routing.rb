@@ -1,4 +1,12 @@
 class RouteObject
+  def match
+    options = {}
+    options = args.pop if args[-1].is_a?(Hash)
+    options[:default] ||= {}
+
+    # TODO: continue here
+  end
+
   def initialize
     @rules = []
   end
