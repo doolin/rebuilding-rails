@@ -4,7 +4,12 @@ class RouteObject
     options = args.pop if args[-1].is_a?(Hash)
     options[:default] ||= {}
 
-    # TODO: continue here
+    dest = nil
+    dest = args.pop if args.size > 0
+    raise "Too many args!" if args.size > 0
+
+    parts = url.split('/')
+    parts.select! { |p| !p.empty }
   end
 
   def initialize
