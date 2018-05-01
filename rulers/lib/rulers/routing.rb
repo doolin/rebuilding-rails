@@ -9,7 +9,20 @@ class RouteObject
     raise "Too many args!" if args.size > 0
 
     parts = url.split('/')
-    parts.select! { |p| !p.empty }
+    parts.select! { |p| !p.empty? }
+
+    vars = []
+    regexp_parts = parts.map do |part|
+      if part[0] == ';'
+        vars << part[1..-1]
+        "([a-zA-Z0-9]]+)"
+      elsif part[0] == '*'
+        vars << part[1..-1]
+        "(.*)"
+      else
+        part
+      end
+    end
   end
 
   def initialize
