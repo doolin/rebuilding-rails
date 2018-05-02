@@ -23,6 +23,14 @@ class RouteObject
         part
       end
     end
+
+    regexp = regexp_parts.join('/')
+    @rules.push({
+      regexp: Regexp.new("^/#{regexp}$"),
+      vars: vars,
+      dest: dest,
+      options: options
+    })
   end
 
   def initialize
