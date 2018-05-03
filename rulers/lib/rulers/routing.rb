@@ -1,4 +1,19 @@
 class RouteObject
+  def check_url(url)
+    @rules.each do |r|
+      m = r[:regexp].match(url)
+
+      if m
+        options = r[:options]
+        params = options[:default].dup
+        r[:vars].each_with_index do |v, i|
+          params[v] = m.captures[i]
+        end
+
+      end
+    end
+  end
+
   def match
     options = {}
     options = args.pop if args[-1].is_a?(Hash)
