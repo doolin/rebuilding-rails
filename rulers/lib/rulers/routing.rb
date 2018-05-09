@@ -9,9 +9,18 @@ class RouteObject
         r[:vars].each_with_index do |v, i|
           params[v] = m.captures[i]
         end
-
+        dest = nil
+        if r[:dest]
+          return get_dest(r[:dest], params)
+        else
+          controller = params["controller"]
+          action = params["action"]
+          return get_dest("#{controller}" + "##{action}", params)
+        end
       end
     end
+
+    nil
   end
 
   def match
