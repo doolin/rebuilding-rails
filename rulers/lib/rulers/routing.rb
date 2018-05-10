@@ -23,6 +23,16 @@ class RouteObject
     nil
   end
 
+  def get_dest(dest, routing_params = {})
+    return dest if dest.respond_to?(:call)
+    if dest =~ /^([^#]+)#(#]+)$/
+      name = $1.capitalize
+      cont = Object.const_get("#{name}Controller")
+      return cont.action($2, routing_params)
+    end
+    raise "No destination: #{dest.inspect}!"
+  end
+
   def match
     options = {}
     options = args.pop if args[-1].is_a?(Hash)
