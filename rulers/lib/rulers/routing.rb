@@ -25,7 +25,7 @@ class RouteObject
 
   def get_dest(dest, routing_params = {})
     return dest if dest.respond_to?(:call)
-    if dest =~ /^([^#]+)#(#]+)$/
+    if dest =~ /^([^#]+)#([^#]+)$/
       name = $1.capitalize
       cont = Object.const_get("#{name}Controller")
       return cont.action($2, routing_params)
