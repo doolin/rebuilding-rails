@@ -4,20 +4,23 @@ RSpec.describe Rulers do
   end
 
   describe Rulers::Application do
+    subject(:application) { Rulers::Application.new }
+
     describe '.new' do
       it 'instantiates' do
-        expect(Rulers::Application.new).to_not be_nil
+        expect(application).to_not be_nil
       end
     end
 
     describe '#call' do
-      it '' do
+      it 'returns 404 for favicon' do
         env = { 'PATH_INFO' => '/favicon.ico' }
-        app = Rulers::Application.new
         expected = [404, {"Content-Type"=>"text/html"}, []]
 
-        expect(app.call(env)).to eq expected
+        expect(application.call(env)).to eq expected
       end
+
+      it 'calls rack_app'
     end
   end
 end
