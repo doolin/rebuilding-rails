@@ -20,7 +20,12 @@ RSpec.describe Rulers do
         expect(application.call(env)).to eq expected
       end
 
-      it 'calls rack_app'
+      xit 'calls rack_app' do
+        env = { 'FOO' => '/bar' }
+        expected = []
+
+        expect(application.call(env)).to eq expected
+      end
     end
   end
 end
