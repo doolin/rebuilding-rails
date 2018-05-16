@@ -1,6 +1,9 @@
-module Routing
-  RSpec.describe Routing do
+module Rulers
+  RSpec.describe RouteObject do
     describe '#check_url' do
+      it '' do
+        routing = RouteObject.new
+      end
     end
 
     describe '#get_dest' do
