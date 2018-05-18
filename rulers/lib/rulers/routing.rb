@@ -1,4 +1,8 @@
 class RouteObject
+  def initialize
+    @rules = []
+  end
+
   def check_url(url)
     @rules.each do |r|
       m = r[:regexp].match(url)
@@ -33,7 +37,7 @@ class RouteObject
     raise "No destination: #{dest.inspect}!"
   end
 
-  def match
+  def match(url, *args)
     options = {}
     options = args.pop if args[-1].is_a?(Hash)
     options[:default] ||= {}
@@ -65,16 +69,6 @@ class RouteObject
       dest: dest,
       options: options
     })
-  end
-
-  def initialize
-    @rules = []
-  end
-
-  def match(url, *args)
-  end
-
-  def check_url(url)
   end
 end
 
