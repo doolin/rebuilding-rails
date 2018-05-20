@@ -38,6 +38,21 @@ end
         ]
         expect(result).to eq expected
       end
+
+      it ':controller' do
+        router = RouteObject.new
+        result = router.match('foobar')
+        expected = [
+          {
+            :regexp=>/^\/foobar$/,
+            :vars=>[],
+            :dest=>nil,
+            :options=>{:default=>{}}
+          }
+        ]
+        expect(result).to eq expected
+      end
+
     end
   end
 end
