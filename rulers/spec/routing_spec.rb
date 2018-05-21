@@ -22,6 +22,20 @@ end
     end
 
     describe '#get_dest' do
+      it '' do
+        routing = RouteObject.new
+        # result = routing.get_dest('sdfgdf')
+        result = routing.get_dest('foo#bar')
+        expect(result).to eq ''
+      end
+
+      it 'cannot load unknown controller' do
+        routing = RouteObject.new
+        expect do
+          result = routing.get_dest('foo#bar')
+          # expect(result).to eq ''
+        end.to raise_error(Loaderror)
+      end
     end
 
     describe 'match' do
