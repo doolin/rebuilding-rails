@@ -25,7 +25,7 @@ end
       it '' do
         routing = RouteObject.new
         # result = routing.get_dest('sdfgdf')
-        result = routing.get_dest('foo#bar')
+        result = routing.get_dest('quotes#bar')
         expect(result).to eq ''
       end
 
@@ -33,8 +33,7 @@ end
         routing = RouteObject.new
         expect do
           result = routing.get_dest('foo#bar')
-          # expect(result).to eq ''
-        end.to raise_error(Loaderror)
+        end.to raise_error(LoadError)
       end
     end
 
