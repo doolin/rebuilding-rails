@@ -18,6 +18,29 @@ end
     describe '#check_url' do
       it '' do
         routing = RouteObject.new
+        routing.instance_eval do
+          # a route here
+        end
+        result = routing.check_url('')
+        expect(result).to eq 2
+      end
+
+      it '/' do
+        routing = RouteObject.new
+        result = routing.check_url('/')
+        expect(result).to eq 2
+      end
+
+      it '/foobar' do
+        routing = RouteObject.new
+        result = routing.check_url('/foobar')
+        expect(result).to eq 2
+      end
+
+      it 'http://foobar.com' do
+        routing = RouteObject.new
+        result = routing.check_url('http://foobar.com')
+        expect(result).to eq 2
       end
     end
 
