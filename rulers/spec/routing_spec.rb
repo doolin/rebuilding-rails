@@ -19,10 +19,10 @@ end
       it '' do
         routing = RouteObject.new
         routing.instance_eval do
-          # a route here
+          match '', 'quotes#index'
         end
         result = routing.check_url('')
-        expect(result).to eq 2
+        expect(result).to be nil
       end
 
       it '/' do
@@ -38,8 +38,12 @@ end
       end
 
       it 'http://foobar.com' do
+        url = 'http://foobar.com/'
         routing = RouteObject.new
-        result = routing.check_url('http://foobar.com')
+        routing.instance_eval do
+          match '/', 'quotes#index'
+        end
+        result = routing.check_url(url)
         expect(result).to eq 2
       end
     end

@@ -1,9 +1,12 @@
+require 'pry'
+
 class RouteObject
   def initialize
     @rules = []
   end
 
   def check_url(url)
+    binding.pry
     @rules.each do |r|
       m = r[:regexp].match(url)
 
@@ -40,6 +43,7 @@ class RouteObject
   end
 
   def match(url, *args)
+    binding.pry
     options = {}
     options = args.pop if args[-1].is_a?(Hash)
     options[:default] ||= {}
@@ -71,6 +75,7 @@ class RouteObject
       dest: dest,
       options: options
     })
+    binding.pry
   end
 end
 
