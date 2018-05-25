@@ -27,6 +27,11 @@ end
 
       it '/' do
         routing = RouteObject.new
+        # wrap this in something which expects a quotes controller
+        # and raises when it can't find it.
+        routing.instance_eval do
+          match '/', 'quotes#index'
+        end
         result = routing.check_url('/')
         expect(result).to eq 2
       end
