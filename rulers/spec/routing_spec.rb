@@ -29,11 +29,16 @@ end
         routing = RouteObject.new
         # wrap this in something which expects a quotes controller
         # and raises when it can't find it.
-        routing.instance_eval do
-          match '/', 'quotes#index'
-        end
+        # expect do
+          routing.instance_eval do
+            match '/', 'quotes#index'
+          end
+        # end.to raise_error(LoadError, '')
+
+
+        binding.pry
         result = routing.check_url('/')
-        expect(result).to eq 2
+        # expect(result).to eq 2
       end
 
       it '/foobar' do
@@ -57,8 +62,10 @@ end
       it '' do
         routing = RouteObject.new
         # result = routing.get_dest('sdfgdf')
-        result = routing.get_dest('quotes#bar')
-        expect(result).to eq ''
+        expect do
+          result = routing.get_dest('quotes#bar')
+        end.to raise_error(LoadError, 'cannot load such file -- quotes_controller')
+        # expect(result).to eq ''
       end
 
       it 'cannot load unknown controller' do
