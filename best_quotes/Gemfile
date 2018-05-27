@@ -2,3 +2,5 @@ source 'https://rubygems.org'
 
 gem 'rack'
 gem 'rulers', path: '../rulers'
+gem 'rspec'
+gem 'pry-nav'
