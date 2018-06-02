@@ -3,6 +3,19 @@ RSpec.describe Rulers do
     expect(Rulers::VERSION).not_to be nil
   end
 
+  describe '.to_underscore' do
+    it '' do
+      expected = '/'
+      expect(Rulers.to_underscore('::')).to eq expected
+    end
+
+    it '' do
+      expected = 'foo'
+      arg = 'foo'
+      expect(Rulers.to_underscore(arg)).to eq expected
+    end
+  end
+
   describe Rulers::Application do
     subject(:application) { Rulers::Application.new }
 

@@ -9,7 +9,7 @@ RSpec.describe HomeController do
   end
 
   describe '#index' do
-    it 'instantiates' do
+    it 'works correctly' do
       env = :test
       expected = 'index action'
       expect(HomeController.new(env).index).to eq expected
