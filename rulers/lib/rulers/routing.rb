@@ -75,7 +75,6 @@ class RouteObject
       dest: dest,
       options: options
     })
-    binding.pry
   end
 end
 

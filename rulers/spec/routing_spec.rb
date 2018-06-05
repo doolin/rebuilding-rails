@@ -48,10 +48,12 @@ end
       end
 
       it 'http://foobar.com' do
-        url = 'http://foobar.com/'
+        url = 'http://foobar.com'
         routing = RouteObject.new
+        # TODO: the url seems to be getting mangled in the match method.
+        # Command line investigation shows a problem.
         routing.instance_eval do
-          match '/', 'quotes#index'
+          match url, 'quotes#index'
         end
         result = routing.check_url(url)
         expect(result).to eq 2
