@@ -47,16 +47,18 @@ end
         expect(result).to eq 2
       end
 
-      it 'http://foobar.com' do
-        url = 'http://foobar.com'
+      it '/foobar' do
+        url = '/foobar'
         routing = RouteObject.new
         # TODO: the url seems to be getting mangled in the match method.
         # Command line investigation shows a problem.
         routing.instance_eval do
-          match url, 'quotes#index'
+          match '/foobar', 'quotes#index'
         end
+        expected = 'quotes_controller'
+        expect(routing).to receive(:get_dest).and_return(expected)
         result = routing.check_url(url)
-        expect(result).to eq 2
+        expect(result).to eq expected
       end
     end
 
