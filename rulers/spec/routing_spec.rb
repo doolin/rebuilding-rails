@@ -19,6 +19,17 @@ end
       it '' do
         routing = RouteObject.new
         routing.instance_eval do
+          match ':controller/:id/:action'
+        end
+        binding.pry
+        url = '/foo/3/bar'
+        result = routing.check_url(url)
+        expect(result).to eq 3
+      end
+
+      it '' do
+        routing = RouteObject.new
+        routing.instance_eval do
           match '', 'quotes#index'
         end
         result = routing.check_url('')
@@ -27,18 +38,15 @@ end
 
       it '/' do
         routing = RouteObject.new
-        # wrap this in something which expects a quotes controller
-        # and raises when it can't find it.
-        # expect do
           routing.instance_eval do
             match '/', 'quotes#index'
           end
-        # end.to raise_error(LoadError, '')
-
 
         binding.pry
+        expected = 'quotes_controller'
+        expect(routing).to receive(:get_dest).and_return(expected)
         result = routing.check_url('/')
-        # expect(result).to eq 2
+        expect(result).to eq expected
       end
 
       it '/foobar' do
