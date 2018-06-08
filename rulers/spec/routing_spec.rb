@@ -71,20 +71,20 @@ end
     end
 
     describe '#get_dest' do
-      it '' do
+      it 'loads a known controller' do
         routing = RouteObject.new
-        # result = routing.get_dest('sdfgdf')
-        expect do
-          result = routing.get_dest('quotes#bar')
-        end.to raise_error(LoadError, 'cannot load such file -- quotes_controller')
-        # expect(result).to eq ''
+        expected = 'quotes_controller'
+        expect(routing).to receive(:get_dest).and_return(expected)
+        result = routing.get_dest('quotes#bar')
+
+        expect(result).to eq expected
       end
 
       it 'cannot load unknown controller' do
         routing = RouteObject.new
         expect do
           result = routing.get_dest('foo#bar')
-        end.to raise_error(LoadError)
+        end.to raise_error(LoadError, 'cannot load such file -- foo_controller')
       end
     end
 
