@@ -21,7 +21,7 @@ end
         routing.instance_eval do
           match ':controller/:id/:action'
         end
-        binding.pry
+        # binding.pry
         url = '/foo/3/bar'
         result = routing.check_url(url)
         expect(result).to eq 3
@@ -42,7 +42,7 @@ end
             match '/', 'quotes#index'
           end
 
-        binding.pry
+        # binding.pry
         expected = 'quotes_controller'
         expect(routing).to receive(:get_dest).and_return(expected)
         result = routing.check_url('/')
